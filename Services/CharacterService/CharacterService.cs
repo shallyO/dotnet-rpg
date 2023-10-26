@@ -23,19 +23,21 @@ namespace dotnet_rpg.Services.CharacterService
 
         public async Task <ServiceResponse<List<Character>>> GetAllCharacters()
         {
-            return (characters);
+            var serviceResponse = new ServiceResponse<List<Character>>();
+            serviceResponse.Data =  characters;       
+            return serviceResponse;
 
         }
 
         public async Task <ServiceResponse<Character>> GetCharacterById(int id)
         {
+            var serviceResponse = new ServiceResponse<Character>();
+
             var character = characters.FirstOrDefault(c => c.Id == id);
 
-            if(character is not null){
-                return character;
-            }
+            serviceResponse.Data = character;
 
-            throw new Exception("character not found");
+            return serviceResponse;
 
         }
     }
